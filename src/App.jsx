@@ -9,7 +9,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/login" component={Login}></Route>
-        <Route path="/login" component={Admin}></Route>
+        <Route path="/admin" component={Admin}></Route>
       </Switch>
     </BrowserRouter>
   );
