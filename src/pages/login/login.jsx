@@ -29,9 +29,6 @@ const Login = () => {
 						<Form
 							form={form}
 							name="basic"
-							wrapperCol={{
-								span: 16,
-							}}
 							initialValues={{
 								remember: true,
 							}}
@@ -43,6 +40,7 @@ const Login = () => {
 									{
 										required: true,
 										message: 'Please input your username!',
+										whitespace: true,
 									},
 								]}
 							>
@@ -58,16 +56,13 @@ const Login = () => {
 									{
 										required: true,
 										message: 'Please input your password!',
+										whitespace: true,
 									},
 								]}
 							>
 								<Input.Password
 									prefix={<UnlockOutlined className="site-form-item-icon" />}
 									placeholder="Password"
-								// onChange={(e) => setUser({
-								// 	...user,
-								// 	password: e.target.value
-								// })}
 								/>
 							</Form.Item>
 
@@ -83,69 +78,5 @@ const Login = () => {
 		</LoginStyle>
 	);
 }
-
-
-// class Login extends Component {
-// 	render() {
-// 		return (
-// 			<LoginStyle className="login">
-// 				<HeaderStyle className='login-header'>
-// 					<header>
-// 						<h1>後台管理系統</h1>
-// 					</header>
-// 				</HeaderStyle>
-// 				<SectionStyle>
-// 					<section className='login-content'>
-// 						<h2>用戶登入</h2>
-// 						<FormStyle>
-// 							<Form
-// 								name="basic"
-// 								wrapperCol={{
-// 									span: 16,
-// 								}}
-// 								initialValues={{
-// 									remember: true,
-// 								}}
-// 								// onFinish={onFinish}
-// 								// onFinishFailed={onFinishFailed}
-// 								autoComplete="off"
-// 							>
-// 								<Form.Item
-// 									name="username"
-// 									rules={[
-// 										{
-// 											required: true,
-// 											message: 'Please input your username!',
-// 										},
-// 									]}
-// 								>
-// 									<Input placeholder="Username" />
-// 								</Form.Item>
-
-// 								<Form.Item
-// 									name="password"
-// 									rules={[
-// 										{
-// 											required: true,
-// 											message: 'Please input your password!',
-// 										},
-// 									]}
-// 								>
-// 									<Input.Password placeholder="Password" />
-// 								</Form.Item>
-
-// 								<Form.Item>
-// 									<Button type="primary" htmlType="submit">
-// 										Login
-// 									</Button>
-// 								</Form.Item>
-// 							</Form>
-// 						</FormStyle>
-// 					</section>
-// 				</SectionStyle>
-// 			</LoginStyle>
-// 		);
-// 	}
-// }
 
 export default Login;
