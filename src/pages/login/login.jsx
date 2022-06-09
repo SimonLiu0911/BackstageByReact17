@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined, UnlockOutlined } from '@ant-design/icons';
-
+// style
 import { LoginStyle, HeaderStyle, SectionStyle, FormStyle } from "./loginStyle";
+// ajax
+import { reqLogin } from '../../assets/api';
 
-const Login = () => {
+const Login = (props) => {
 	const [form] = Form.useForm();
 	const onCheck = async () => {
 		try {
 			const values = await form.validateFields();
-			console.log('Success:', values);
+			const { email, password } = values;
+			const response = await reqLogin(email, password);
+			if (response.status === 200) {
+				sessionStorage.setItem("token", response.data.accessToken);
+				props.history.replace("/");
+			}
 		} catch (errorInfo) {
-			console.log('Failed:', errorInfo);
+			console.log('Failed:', errorInfo.response);
 		}
 	};
+
+	useEffect(() => {
+		sessionStorage.clear();
+	}, [])
 
 	return (
 		<LoginStyle className="login">
@@ -35,18 +46,18 @@ const Login = () => {
 							autoComplete="off"
 						>
 							<Form.Item
-								name="username"
+								name="email"
 								rules={[
 									{
 										required: true,
-										message: 'Please input your username!',
+										message: 'Please input your email!',
 										whitespace: true,
 									},
 								]}
 							>
 								<Input
 									prefix={<UserOutlined className="site-form-item-icon" />}
-									placeholder="Username"
+									placeholder="Email"
 								/>
 							</Form.Item>
 

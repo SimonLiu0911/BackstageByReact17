@@ -1,3 +1,9 @@
 {
-  
+  "users": [
+    {
+      "email": "admin@hotmail.com",
+      "password": "$2a$10$S83kBaPWSyCTvqz7DXxrbeHA1X/onPe4rwihIfHU2OJ8foXTXMDuW",
+      "id": 1
+    }
+  ]
 }
