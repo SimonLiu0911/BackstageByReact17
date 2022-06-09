@@ -27,7 +27,7 @@ const Login = (props) => {
 				const { user } = response.data
 				memoryUtils.user = user;
 				storageUtils.saveUser(user);
-				props.history.replace("/admin");
+				props.history.replace("/");
 			}
 		} catch (errorInfo) {
 			console.log('Failed:', errorInfo.response);

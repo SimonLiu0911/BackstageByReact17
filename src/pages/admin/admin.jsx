@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Redirect } from "react-router-dom";
-import memoryUtils from "../../utils/memoryUtils";
 import { Layout } from "antd";
+import memoryUtils from "../../utils/memoryUtils";
+// component
+import LetNav from "../../components/leftNav/letNav";
+import Header from "../../components/header/header";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Sider, Content } = Layout;
 const Admin = () => {
   const user = memoryUtils.user;
   if (!user) {
@@ -11,11 +14,13 @@ const Admin = () => {
   }
   return (
     <Layout style={{ height: "100%" }}>
-      <Sider>Sider</Sider>
+      <Sider>
+        <LetNav></LetNav>
+      </Sider>
       <Layout>
         <Header>Header</Header>
-        <Content>Content</Content>
-        <Footer>Footer</Footer>
+        <Content style={{ backgroundColor: "#fff" }}>Content</Content>
+        <Footer style={{ textAlign: "center" }}>For Practice</Footer>
       </Layout>
     </Layout>
   );
