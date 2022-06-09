@@ -1,21 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+// import { Redirect } from 'react-router-dom';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined, UnlockOutlined } from '@ant-design/icons';
 // style
 import { LoginStyle, HeaderStyle, SectionStyle, FormStyle } from "./loginStyle";
 // ajax
 import { reqLogin } from '../../assets/api';
+// utils
+import memoryUtils from '../../utils/memoryUtils';
+import storageUtils from '../../utils/storageUtils';
 
 const Login = (props) => {
 	const [form] = Form.useForm();
+	// 如果用戶已經登入，自動跳轉到管理頁面
+	// const user = memoryUtils.user;
+	// if (!user) {
+	// 	return <Redirect to="/login" />
+	// }
 	const onCheck = async () => {
 		try {
 			const values = await form.validateFields();
 			const { email, password } = values;
 			const response = await reqLogin(email, password);
 			if (response.status === 200) {
-				sessionStorage.setItem("token", response.data.accessToken);
-				props.history.replace("/");
+				// sessionStorage.setItem("token", response.data.accessToken);
+				const { user } = response.data
+				memoryUtils.user = user;
+				storageUtils.saveUser(user);
+				props.history.replace("/admin");
 			}
 		} catch (errorInfo) {
 			console.log('Failed:', errorInfo.response);
