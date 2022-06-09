@@ -6,18 +6,25 @@ import { LoginStyle, HeaderStyle, SectionStyle, FormStyle } from "./loginStyle";
 // ajax
 import { reqLogin } from '../../assets/api';
 
-const Login = () => {
+const Login = (props) => {
 	const [form] = Form.useForm();
 	const onCheck = async () => {
 		try {
 			const values = await form.validateFields();
-			const {email, password} = values;
-			const response = await reqLogin(email, password)
-			console.log(response);
+			const { email, password } = values;
+			const response = await reqLogin(email, password);
+			if (response.status === 200) {
+				sessionStorage.setItem("token", response.data.accessToken);
+				props.history.replace("/");
+			}
 		} catch (errorInfo) {
 			console.log('Failed:', errorInfo.response);
 		}
 	};
+
+	useEffect(() => {
+		sessionStorage.clear();
+	}, [])
 
 	return (
 		<LoginStyle className="login">
