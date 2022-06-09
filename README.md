@@ -11,3 +11,8 @@ src
 |-utils (工具模塊)
 |App.js (應用根組件)
 |index.js (入口 js)
+
+## 模擬 REST APIs
+
+json-server模擬data
+json-server-auth模擬login

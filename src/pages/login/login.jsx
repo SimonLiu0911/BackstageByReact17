@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined, UnlockOutlined } from '@ant-design/icons';
-
+// style
 import { LoginStyle, HeaderStyle, SectionStyle, FormStyle } from "./loginStyle";
+// ajax
+import { reqLogin } from '../../assets/api';
 
 const Login = () => {
 	const [form] = Form.useForm();
 	const onCheck = async () => {
 		try {
 			const values = await form.validateFields();
-			console.log('Success:', values);
+			const {email, password} = values;
+			reqLogin(email, password)
+			.then(response => {
+				console.log('Success', response);
+			})
 		} catch (errorInfo) {
 			console.log('Failed:', errorInfo);
 		}
@@ -35,18 +41,18 @@ const Login = () => {
 							autoComplete="off"
 						>
 							<Form.Item
-								name="username"
+								name="email"
 								rules={[
 									{
 										required: true,
-										message: 'Please input your username!',
+										message: 'Please input your email!',
 										whitespace: true,
 									},
 								]}
 							>
 								<Input
 									prefix={<UserOutlined className="site-form-item-icon" />}
-									placeholder="Username"
+									placeholder="email"
 								/>
 							</Form.Item>
 

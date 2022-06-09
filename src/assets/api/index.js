@@ -5,8 +5,9 @@
  */
 import ajax from "./ajax";
 
-export const reqLogin = (username, password) =>
-  ajax("/login", { username, password }, "POST");
+const apiUrl = process.env.REACT_APP_URL;
+export const reqLogin = (email, password) =>
+  ajax(`${apiUrl}/login`, { email, password }, "POST");
 
 // 添加用戶
 export const reqAddUser = (user) => ajax("/manage/user/add", user, "POST");
