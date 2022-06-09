@@ -12,12 +12,10 @@ const Login = () => {
 		try {
 			const values = await form.validateFields();
 			const {email, password} = values;
-			reqLogin(email, password)
-			.then(response => {
-				console.log('Success', response);
-			})
+			const response = await reqLogin(email, password)
+			console.log(response);
 		} catch (errorInfo) {
-			console.log('Failed:', errorInfo);
+			console.log('Failed:', errorInfo.response);
 		}
 	};
 
@@ -52,7 +50,7 @@ const Login = () => {
 							>
 								<Input
 									prefix={<UserOutlined className="site-form-item-icon" />}
-									placeholder="email"
+									placeholder="Email"
 								/>
 							</Form.Item>
 
