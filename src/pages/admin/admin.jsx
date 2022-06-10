@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 import memoryUtils from "../../utils/memoryUtils";
@@ -38,7 +38,15 @@ const Admin = () => {
         <Header>Header</Header>
         <Content style={{ backgroundColor: "#fff" }}>
           <Switch>
-            <Route to="/" component={Home}></Route>
+            <Route path="/home" component={Home}></Route>
+            <Route path="/role" component={Role}></Route>
+            <Route path="/user" component={User}></Route>
+            <Route path="/products" component={Products}></Route>
+            <Route path="/category" component={Category}></Route>
+            <Route path="/charts/barchat" component={BarChart}></Route>
+            <Route path="/charts/linechart" component={LineChart}></Route>
+            <Route path="/charts/piechart" component={PieChart}></Route>
+            <Redirect to="/home" />
           </Switch>
         </Content>
         <Footer style={{ textAlign: "center" }}>For Practice</Footer>
