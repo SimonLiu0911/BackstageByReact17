@@ -46,7 +46,7 @@ const Admin = () => {
             <Route path="/charts/barchat" component={BarChart}></Route>
             <Route path="/charts/linechart" component={LineChart}></Route>
             <Route path="/charts/piechart" component={PieChart}></Route>
-            <Redirect to="/home" />
+            {/* <Redirect to="/home" /> */}
           </Switch>
         </Content>
         <Footer style={{ textAlign: "center" }}>For Practice</Footer>
