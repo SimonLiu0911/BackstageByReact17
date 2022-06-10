@@ -19,16 +19,7 @@ const Login = (props) => {
 	// }
 	const onCheck = async () => {
 		try {
-			const values = await form.validateFields();
-			const { email, password } = values;
-			const response = await reqLogin(email, password);
-			if (response.status === 200) {
-				// sessionStorage.setItem("token", response.data.accessToken);
-				const { user } = response.data
-				memoryUtils.user = user;
-				storageUtils.saveUser(user);
-				props.history.replace("/");
-			}
+			props.history.replace("/");
 		} catch (errorInfo) {
 			console.log('Failed:', errorInfo.response);
 		}
