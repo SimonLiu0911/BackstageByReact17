@@ -1,3 +1,4 @@
+// home.jsx file
 import React from 'react';
 
 const Home = () => {

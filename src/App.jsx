@@ -1,3 +1,4 @@
+// App.jsx file
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Admin from "./pages/admin/admin";
