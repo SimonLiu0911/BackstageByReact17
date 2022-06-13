@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 import memoryUtils from "../../utils/memoryUtils";
 // component
-import LetNav from "../../components/leftNav/letNav";
+import LetNav from "../../components/leftNav/leftNav";
 import Header from "../../components/header/header";
 // pages
 // const Home = lazy(() => import("../home/home"));
@@ -21,7 +21,7 @@ import Products from "../products/products";
 import BarChart from "../chart/barChart";
 import LineChart from "../chart/lineChart";
 import PieChart from "../chart/pieChart";
-import Category from "../home/home";
+import Category from "../category/category";
 
 const { Footer, Sider, Content } = Layout;
 const Admin = () => {
