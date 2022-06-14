@@ -20,7 +20,7 @@ const { Footer, Sider, Content } = Layout;
 
 const Admin = () => {
   return (
-    <Layout style={{ height: "100%" }}>
+    <Layout style={{ height: "100vh" }}>
       <Sider>
         <LetNav></LetNav>
       </Sider>
@@ -33,10 +33,10 @@ const Admin = () => {
             <Route path="/user" component={User}></Route>
             <Route path="/products" component={Products}></Route>
             <Route path="/category" component={Category}></Route>
-            <Route path="/charts/barchat" component={BarChart}></Route>
+            <Route path="/charts/barchart" component={BarChart}></Route>
             <Route path="/charts/linechart" component={LineChart}></Route>
             <Route path="/charts/piechart" component={PieChart}></Route>
-            {/* <Redirect to="/home" /> */}
+            <Redirect to="/home" />
           </Switch>
         </Content>
         <Footer style={{ textAlign: "center" }}>For Practice</Footer>

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import { LeftNavStyle, HeaderStyle } from "./leftNavStyled";
-import menuList from "../../config/menuConfig";
+// import menuList from "../../config/menuConfig";
 import { Menu } from "antd";
 import {
   HomeOutlined,
@@ -14,27 +14,9 @@ import {
   BarChartOutlined,
 } from "@ant-design/icons";
 
-const LetNav = () => {
-  //   const getMenuList = (menuList) => {
-  //     return menuList.map((item) => {
-  //       if (true) {
-  //         return (
-  //           <Menu.Item key={item.key}>
-  //             <Link to={item.path}>
-  //               {item.title}
-  //             </Link>
-  //           </Menu.Item>
-  //         );
-  //       }
-  //         else {
-  //           return (
-  //             <Menu.SubMenu key={item.key} title={item.title} icon={item.icon}>
-  //               {getMenuList(menuList)}
-  //             </Menu.SubMenu>
-  //           );
-  //         }
-  //     });
-  //   };
+
+const LetNav = (props) => {
+  const path = props.location.pathname;
   return (
     <div>
       <Link to="/">
@@ -44,36 +26,42 @@ const LetNav = () => {
           </HeaderStyle>
         </LeftNavStyle>
       </Link>
-      <Menu defaultSelectedKeys={["home"]} mode="inline" theme="dark">
-        <Menu.Item key="home" icon={<HomeOutlined />}>
+      {/* TODO (35)selectedKeys要改*/}
+      <Menu
+        defaultSelectedKeys={[path]}
+        defaultOpenKeys={["/charts"]}
+        selectedKeys={[path]}
+        mode="inline"
+        theme="dark">
+        <Menu.Item key="/home" icon={<HomeOutlined />}>
           <Link to="/home">首頁</Link>
         </Menu.Item>
-        <Menu.Item key="role" icon={<DesktopOutlined />}>
+        <Menu.Item key="/role" icon={<DesktopOutlined />}>
           <Link to="/role">用戶管理</Link>
         </Menu.Item>
-        <Menu.Item key="user" icon={<UserOutlined />}>
+        <Menu.Item key="/user" icon={<UserOutlined />}>
           <Link to="/user">角色管理</Link>
         </Menu.Item>
         <Menu.SubMenu
-          key="productsManage"
+          key="/productsManage"
           title="商品"
           icon={<AppstoreOutlined />}
         >
-          <Menu.Item key="category">
+          <Menu.Item key="/category">
             <Link to="/category">品類管理</Link>
           </Menu.Item>
-          <Menu.Item key="products">
+          <Menu.Item key="/products">
             <Link to="/products">商品管理</Link>
           </Menu.Item>
         </Menu.SubMenu>
-        <Menu.SubMenu key="charts" title="圖形圖表" icon={<FundOutlined />}>
-          <Menu.Item key="barChart" icon={<BarChartOutlined />}>
-            <Link to="/charts/barchat">柱形圖</Link>
+        <Menu.SubMenu key="/charts" title="圖形圖表" icon={<FundOutlined />}>
+          <Menu.Item key="/charts/barchart" icon={<BarChartOutlined />}>
+            <Link to="/charts/barchart">柱形圖</Link>
           </Menu.Item>
-          <Menu.Item key="lineChart" icon={<LineChartOutlined />}>
+          <Menu.Item key="/charts/linechart" icon={<LineChartOutlined />}>
             <Link to="/charts/linechart">折線圖</Link>
           </Menu.Item>
-          <Menu.Item key="pieChart" icon={<PieChartOutlined />}>
+          <Menu.Item key="/charts/piechart" icon={<PieChartOutlined />}>
             <Link to="/charts/piechart">圓餅圖</Link>
           </Menu.Item>
         </Menu.SubMenu>
@@ -82,4 +70,4 @@ const LetNav = () => {
   );
 };
 
-export default LetNav;
+export default withRouter(LetNav);
