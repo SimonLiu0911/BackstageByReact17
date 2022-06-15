@@ -1,19 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { formateDate } from "../../utils/dateUtils";
 import memoryUtils from "../../utils/memoryUtils";
 import { HeaderStyle, HeaderTopStyle, HeaderBottomStyle } from "./headerStyle";
 
 const Header = () => {
-  const currentTime = formateDate(Date.now());
-  console.log(memoryUtils);
-  // useEffect(() => {
-  //   set
-  // }, [])
+  const [currentTime, setCurrentTime] = useState(formateDate(Date.now()));
+  const user = memoryUtils.user;
+  console.log(user);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCurrentTime(formateDate(Date.now()));
+    }, 1000);
+    // setInterval(() => {
+    //   setCurrentTime(formateDate(Date.now()));
+    // }, 1000);
+  }, [currentTime]);
+
   return (
     <HeaderStyle>
       <HeaderTopStyle>
         <span>歡迎，admin</span>
-        <a href="javascript:;">退出</a>
+        <a href="#">退出</a>
       </HeaderTopStyle>
       <HeaderBottomStyle>
         <div className="header-bottom-left">首頁</div>
