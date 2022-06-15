@@ -12,3 +12,6 @@ export const reqLogin = (email, password) =>
 
 // 添加用戶
 // export const reqAddUser = (user) => ajax("/manage/user/add", user, "POST");
+
+// json請求函數
+export const reqWeather = () => {}
