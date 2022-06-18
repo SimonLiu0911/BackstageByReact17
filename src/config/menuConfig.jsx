@@ -52,17 +52,17 @@ const menuList = [
     children: [
       {
         title: "柱形圖",
-        key: "/charts/bar",
+        key: "/charts/barchart",
         icon: "bar-chart",
       },
       {
         title: "折線圖",
-        key: "/charts/line",
+        key: "/charts/linechart",
         icon: "line-chart",
       },
       {
         title: "圓餅圖",
-        key: "/charts/pie",
+        key: "/charts/piechart",
         icon: "pie-chart",
       },
     ],
