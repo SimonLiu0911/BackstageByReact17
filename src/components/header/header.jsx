@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { formateDate } from "../../utils/dateUtils";
 import { withRouter } from "react-router-dom";
+import { formateDate } from "../../utils/dateUtils";
 import memoryUtils from "../../utils/memoryUtils";
 import menuList from "../../config/menuConfig";
 import { Modal, Button } from "antd";
@@ -27,13 +27,16 @@ const Header = (props) => {
     });
   };
 
-  const logout = () => {
+  const handleLogout = () => {
+    // 跳出 Modal
     Modal.confirm({
       title: "Confirm",
       content: "確定是否要登出",
       okText: "登出",
       cancelText: "取消",
       onOk() {
+        // call logout api
+        setUser({});
         props.history.replace("/login");
       },
     });
@@ -47,22 +50,20 @@ const Header = (props) => {
     const timer = setTimeout(() => {
       setCurrentTime(formateDate(Date.now()));
     }, 1000);
-    return () => {
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, [currentTime]);
 
   return (
     <HeaderStyle>
       <HeaderTopStyle>
         <span>歡迎, {user.email}</span>
-        <Button onClick={logout}>退出</Button>
+        <Button onClick={handleLogout}>退出</Button>
       </HeaderTopStyle>
       <HeaderBottomStyle>
         <div className="header-bottom-left">{title}</div>
         <div className="header-bottom-right">
           <span>{currentTime}</span>
-          <span>晴</span>
+          {/* <span>晴</span> */}
         </div>
       </HeaderBottomStyle>
     </HeaderStyle>
