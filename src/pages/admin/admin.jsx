@@ -25,7 +25,7 @@ const Admin = () => {
         <LetNav></LetNav>
       </Sider>
       <Layout>
-        <Header>Header</Header>
+        <Header></Header>
         <Content style={{ backgroundColor: "#fff", margin: "20px" }}>
           <Switch>
             <Route path="/home" component={Home}></Route>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import { formateDate } from "../../utils/dateUtils";
 import memoryUtils from "../../utils/memoryUtils";
@@ -10,6 +10,7 @@ const Header = (props) => {
   const [currentTime, setCurrentTime] = useState(formateDate(Date.now()));
   const [user, setUser] = useState(memoryUtils.user);
   const [title, setTitle] = useState("首頁");
+  const timer = useRef(null)
   const path = props.location.pathname;
 
   const getTitle = () => {
@@ -47,11 +48,14 @@ const Header = (props) => {
   }, [path]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    timer.current = setInterval(() => {
       setCurrentTime(formateDate(Date.now()));
     }, 1000);
-    return () => clearTimeout(timer);
-  }, [currentTime]);
+
+    return () => {
+      clearInterval(timer.current)
+    }
+  });
 
   return (
     <HeaderStyle>
