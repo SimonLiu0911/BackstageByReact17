@@ -1,26 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { withRouter } from "react-router-dom";
 import { formateDate } from "../../utils/dateUtils";
 import memoryUtils from "../../utils/memoryUtils";
 import { HeaderStyle, HeaderTopStyle, HeaderBottomStyle } from "./headerStyle";
 
-const Header = () => {
+const Header = (props) => {
+  console.log(props);
   const [currentTime, setCurrentTime] = useState(formateDate(Date.now()));
-  const user = memoryUtils.user;
-  console.log(user);
+  const [userInfo, setUserInfo] = useState(memoryUtils.user);
+  const timer = useRef(null)
 
   useEffect(() => {
-    setTimeout(() => {
+    timer.current = setInterval(() => {
       setCurrentTime(formateDate(Date.now()));
     }, 1000);
-    // setInterval(() => {
-    //   setCurrentTime(formateDate(Date.now()));
-    // }, 1000);
+
+    return () => {
+      clearInterval(timer.current)
+    }
   }, [currentTime]);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setCurrentTime(formateDate(Date.now()));
+  //   }, 1000);
+  // }, [currentTime]);
 
   return (
     <HeaderStyle>
       <HeaderTopStyle>
-        <span>歡迎，admin</span>
+        <span>歡迎, {userInfo.email}</span>
         <a href="#">退出</a>
       </HeaderTopStyle>
       <HeaderBottomStyle>
@@ -34,4 +43,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);
