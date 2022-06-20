@@ -1,31 +1,31 @@
 {
-	"users": [
-		{
-			"email": "admin@hotmail.com",
-			"password": "$2a$10$S83kBaPWSyCTvqz7DXxrbeHA1X/onPe4rwihIfHU2OJ8foXTXMDuW",
-			"id": 1
-		}
-	],
-	"categories": [
-		{
-			"parentId": "0",
-			"id": "0",
-			"name": "家用電器"
-		},
-		{
-			"parentId": "0",
-			"id": "1",
-			"name": "電腦"
-		},
-		{
-			"parentId": "0",
-			"id": "2",
-			"name": "電視"
-		},
-		{
-			"parentId": "1",
-			"id": "3",
-			"name": "衣櫃"
-		}
-	]
+  "users": [
+    {
+      "email": "admin@hotmail.com",
+      "password": "$2a$10$S83kBaPWSyCTvqz7DXxrbeHA1X/onPe4rwihIfHU2OJ8foXTXMDuW",
+      "id": 1
+    }
+  ],
+  "categories": [
+    {
+      "parentId": "0",
+      "id": "0",
+      "name": "家用電器"
+    },
+    {
+      "parentId": "0",
+      "id": "1",
+      "name": "電腦"
+    },
+    {
+      "parentId": "0",
+      "id": "2",
+      "name": "電視"
+    },
+    {
+      "parentId": "1",
+      "id": "3",
+      "name": "衣櫃"
+    }
+  ]
 }

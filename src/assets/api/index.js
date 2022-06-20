@@ -14,4 +14,16 @@ export const reqLogin = (email, password) =>
 // export const reqAddUser = (user) => ajax("/manage/user/add", user, "POST");
 
 // json請求函數
-export const reqWeather = () => {}
+export const reqWeather = () => {};
+
+// 取得一級/二級分類列表
+export const reqCategories = (parentId) =>
+  ajax(`${apiUrl}/categories`, { parentId }, "GET");
+
+// 添加分類列表
+export const reqAddCategories = (parentId, categoeyName) =>
+  ajax("/categories", { parentId, categoeyName }, "POST");
+
+// 添加分類列表
+export const reqUpdateCategories = (parentId, categoeyName) =>
+  ajax("/categories", { parentId, categoeyName }, "PATCH");

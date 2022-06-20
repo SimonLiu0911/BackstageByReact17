@@ -11,12 +11,17 @@ import axios from "axios";
 export default function ajax(url, data = {}, type) {
   switch (type) {
     case "GET":
-      return null;
+      return axios.get(url, { params: data }, "GET");
+    //   return axios({
+    //     method: type,
+    //     url,
+    //     data,
+    //   });
     case "POST":
       return axios({
         method: type,
         url,
-        data
+        data,
       });
     default:
       return axios.post(url, data);
