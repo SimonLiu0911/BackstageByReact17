@@ -27,9 +27,9 @@ const LetNav = (props) => {
         </LeftNavStyle>
       </Link>
       {/* TODO (35)selectedKeys要改*/}
+	  {/* defaultOpenKeys={["/charts"]} */}
       <Menu
         defaultSelectedKeys={[path]}
-        defaultOpenKeys={["/charts"]}
         selectedKeys={[path]}
         mode="inline"
         theme="dark">

@@ -11,7 +11,7 @@ export const HeaderTopStyle = styled.div`
   text-align: right;
   line-height: 40px;
   padding-right: 30px;
-  span {
+  & > span {
     margin-right: 10px;
   }
 `;
