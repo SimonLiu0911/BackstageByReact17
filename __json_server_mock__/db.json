@@ -13,17 +13,17 @@
       "name": "家用電器"
     },
     {
-      "parentId": "0",
+      "parentId": "1",
       "id": "1",
       "name": "電腦"
     },
     {
-      "parentId": "0",
+      "parentId": "2",
       "id": "2",
       "name": "電視"
     },
     {
-      "parentId": "1",
+      "parentId": "3",
       "id": "3",
       "name": "衣櫃"
     }
