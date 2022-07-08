@@ -23,7 +23,14 @@ export default function ajax(url, data = {}, type) {
         url,
         data,
       });
+    case "PATCH":
+      return axios({
+        method: type,
+        url,
+        data,
+      });
     default:
+        console.log(111);
       return axios.post(url, data);
   }
   // if (type === "POST") {

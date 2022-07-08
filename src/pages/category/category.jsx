@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Table } from "antd";
+import { Card, Button, Table, Modal, Input, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { reqCategories } from "../../assets/api";
+import { reqCategories, reqUpdateCategories, reqAddCategories } from "../../assets/api";
+import { nanoid } from 'nanoid'
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -9,6 +10,10 @@ const Category = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [parentId, setParentId] = useState("0");
   const [parentName, setParentName] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [categoryName, setCategoryName] = useState("");
+  const [optionedCategory, setOptionedCategory] = useState({});
+  const [modalState, setModalState] = useState(null);
   const getCategories = async () => {
     setIsLoading(true);
     const response = await reqCategories(parentId);
@@ -27,11 +32,11 @@ const Category = () => {
     {
       title: "操作",
       width: 300,
-      render: (categories) => (
+      render: (category) => (
         <span>
-          <Button>修改分類</Button>
+          <Button onClick={() => updateCategory(category)}>修改分類</Button>
           {parentId === "0" ? (
-            <Button onClick={() => showSubCategories(categories)}>
+            <Button onClick={() => showSubCategory(category)}>
               查看子分類
             </Button>
           ) : null}
@@ -39,12 +44,39 @@ const Category = () => {
       ),
     },
   ];
-  // 顯示指定一級分類對象的二子列表
-  const showSubCategories = (categories) => {
-    setParentName(categories.name);
-    setParentId(categories.parentId);
-    console.log(parentName, parentId);
+  const updateCategory = (category) => {
+    setModalState(0)
+    setCategoryName(category.name);
+    setOptionedCategory(category)
+    setIsModalVisible(true);
   };
+  const handleConfirm = async () => {
+    setIsModalVisible(false);
+    if (modalState === 0) {
+        const result = await reqUpdateCategories(optionedCategory.id, categoryName)
+    } else {
+        reqAddCategories(nanoid(), categoryName)
+    }
+    // setCategoryName("")
+  };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setCategoryName("");
+  };
+  const inputCategory = (e) => {
+    setCategoryName(e.target.value);
+  };
+  // 顯示指定一級分類對象的二子列表
+  const showSubCategory = (category) => {
+    console.log("tirgger showSubCategory");
+    setParentName(category.name);
+    setParentId(category.parentId);
+  };
+  // 新增類別
+  const addCategory = () => {
+    setModalState(1)
+    setIsModalVisible(true);
+  }
 
   const title =
     parentId === "0" ? (
@@ -56,7 +88,7 @@ const Category = () => {
       </span>
     );
   const extra = (
-    <Button type="primary">
+    <Button type="primary" onClick={addCategory}>
       <PlusOutlined />
       新增
     </Button>
@@ -76,6 +108,26 @@ const Category = () => {
           rowKey="id"
           loading={isLoading}
         />
+        <Modal
+          title={modalState === 0 ? "修改分類" : "新增分類"}
+          visible={isModalVisible}
+          okText="Confirm"
+          onOk={() => {
+            if (categoryName) {
+              handleConfirm();
+              setCategoryName("")
+            } else {
+                message.error('請輸入分類');
+            }
+          }}
+          onCancel={handleCancel}
+        >
+          <Input
+            placeholder="請輸入分類"
+            value={categoryName}
+            onChange={inputCategory}
+          />
+        </Modal>
       </Card>
     </div>
   );

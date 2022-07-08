@@ -21,9 +21,10 @@ export const reqCategories = (parentId) =>
   ajax(`${apiUrl}/categories`, { parentId }, "GET");
 
 // 添加分類列表
-export const reqAddCategories = (parentId, categoeyName) =>
-  ajax("/categories", { parentId, categoeyName }, "POST");
+export const reqAddCategories = (parentId, categoryName) =>
+  ajax("/categories", { parentId, categoryName }, "POST");
 
-// 添加分類列表
-export const reqUpdateCategories = (parentId, categoeyName) =>
-  ajax("/categories", { parentId, categoeyName }, "PATCH");
+// 更新分類列表
+export const reqUpdateCategories = (id, name) => {
+	return ajax(`/categories/${id}`, { id, name }, "PATCH");
+}

@@ -8,24 +8,24 @@
   ],
   "categories": [
     {
-      "parentId": "0",
+	    "parentId": "0",
       "id": "0",
-      "name": "家用電器"
+      "name": "電器傢俱"
     },
     {
-      "parentId": "1",
-      "id": "1",
-      "name": "電腦"
-    },
-    {
-      "parentId": "2",
+	    "parentId": "0",
       "id": "2",
-      "name": "電視"
+      "name": "木頭傢俱"
     },
     {
-      "parentId": "3",
+      "parentId": "0",
       "id": "3",
-      "name": "衣櫃"
+      "name": "鋼鐵"
+    },
+    {
+      "parentId": "0",
+      "name": "測試",
+      "id": "4"
     }
   ]
 }
