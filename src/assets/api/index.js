@@ -28,3 +28,8 @@ export const reqAddCategories = (parentId, categoryName) =>
 export const reqUpdateCategories = (id, name) => {
 	return ajax(`/categories/${id}`, { id, name }, "PATCH");
 }
+
+// 獲取商品分頁列表
+export const reqProducts = () => {
+	return ajax()
+}
