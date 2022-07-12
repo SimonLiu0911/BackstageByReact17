@@ -2,7 +2,7 @@
 /**
  * 進行 Local 數據存儲管理的工具模塊
  */
-const USER_KEY = "user_key"
+import USER_KEY from "../constants/storageStatus";
 
 export default {
   // 保存 User

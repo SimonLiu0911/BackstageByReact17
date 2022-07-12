@@ -2,16 +2,27 @@ import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import { formateDate } from "../../utils/dateUtils";
 import memoryUtils from "../../utils/memoryUtils";
+import storageUtils from "../../utils/storageUtils";
 import menuList from "../../config/menuConfig";
 import { Modal, Button } from "antd";
 import { HeaderStyle, HeaderTopStyle, HeaderBottomStyle } from "./headerStyle";
+import { reqToken, reqLogout } from "../../assets/api/index";
 
 const Header = (props) => {
   const [currentTime, setCurrentTime] = useState(formateDate(Date.now()));
   const [user, setUser] = useState(memoryUtils.user);
   const [title, setTitle] = useState("首頁");
-  const timer = useRef(null)
+  const timer = useRef(null);
   const path = props.location.pathname;
+
+  const handleCheckToken = async () => {
+    const { token } = storageUtils.getUser("user_key");
+	try {
+		const response = await reqToken(token);
+	} catch {
+		props.history.replace("/login");
+	}
+  };
 
   const getTitle = () => {
     menuList.forEach((item) => {
@@ -35,13 +46,20 @@ const Header = (props) => {
       content: "確定是否要登出",
       okText: "登出",
       cancelText: "取消",
-      onOk() {
+      onOk: async () => {
+		// TODO async/await
         // call logout api
+		const {token} = storageUtils.getUser()
+		// const response = await reqLogout()
         setUser({});
-        props.history.replace("/login");
+        // props.history.replace("/login");
       },
     });
   };
+
+  useEffect(() => {
+    handleCheckToken();
+  }, [props.history]);
 
   useEffect(() => {
     getTitle();
@@ -53,8 +71,8 @@ const Header = (props) => {
     }, 1000);
 
     return () => {
-      clearInterval(timer.current)
-    }
+      clearInterval(timer.current);
+    };
   });
 
   return (
