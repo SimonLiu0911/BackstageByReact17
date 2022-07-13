@@ -17,11 +17,11 @@ const Header = (props) => {
 
   const handleCheckToken = async () => {
     const { token } = storageUtils.getUser("user_key");
-	try {
-		const response = await reqToken(token);
-	} catch {
-		props.history.replace("/login");
-	}
+    try {
+      const response = await reqToken(token);
+    } catch {
+      props.history.replace("/login");
+    }
   };
 
   const getTitle = () => {
@@ -47,12 +47,12 @@ const Header = (props) => {
       okText: "登出",
       cancelText: "取消",
       onOk: async () => {
-		// TODO async/await
-        // call logout api
-		const {token} = storageUtils.getUser()
-		// const response = await reqLogout()
-        setUser({});
-        // props.history.replace("/login");
+        const { token } = storageUtils.getUser();
+        const response = await reqLogout(token);
+        if (response.data.success) {
+          setUser({});
+          props.history.replace("/login");
+        }
       },
     });
   };

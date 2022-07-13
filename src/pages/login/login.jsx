@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { Redirect } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 import { UserOutlined, UnlockOutlined } from "@ant-design/icons";
@@ -12,6 +12,7 @@ import storageUtils from "../../utils/storageUtils";
 // plugin
 
 const Login = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   // 如果用戶已經登入，自動跳轉到管理頁面
   //   const user = memoryUtils.user;
@@ -20,6 +21,7 @@ const Login = (props) => {
   //   }
 
   const onCheck = async () => {
+    setIsLoading(true);
     try {
       const values = await form.validateFields();
       const { email, password } = values;
@@ -35,6 +37,7 @@ const Login = (props) => {
       }
     } catch (errorInfo) {
       console.log("Failed:", errorInfo);
+      setIsLoading(false);
     }
   };
 
@@ -94,7 +97,7 @@ const Login = (props) => {
               </Form.Item>
 
               <Form.Item>
-                <Button type="primary" onClick={onCheck}>
+                <Button type="primary" onClick={onCheck} loading={isLoading}>
                   Login
                 </Button>
               </Form.Item>

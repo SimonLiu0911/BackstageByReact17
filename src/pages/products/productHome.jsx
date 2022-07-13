@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Select, Input, Button, Table } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
 const ProductHome = () => {
+  const [selectValue, setSelectValue] = useState("productName");
   const title = (
     <span>
-      <Select value="1" style={{ width: 150 }}>
-        <Option value="1">按名稱搜索</Option>
-        <Option value="2">按描述搜索</Option>
+      <Select
+        value={selectValue}
+        style={{ width: 150 }}
+        onChange={(value) => {
+          setSelectValue(value);
+        }}
+      >
+        <Option value="productName">按名稱搜索</Option>
+        <Option value="productDesc">按描述搜索</Option>
       </Select>
       <Input placeholder="關鍵字" style={{ width: 150, margin: "0 15px" }} />
       <Button type="primary">Search</Button>
@@ -48,7 +55,7 @@ const ProductHome = () => {
       title: "狀態",
       dataIndex: "status",
       key: "status",
-	  width: 100,
+      width: 100,
       render: (status) => {
         return (
           <span>
@@ -60,7 +67,7 @@ const ProductHome = () => {
     },
     {
       title: "操作",
-	  width: 200,
+      width: 200,
       render: (product) => {
         return (
           <span>

@@ -17,7 +17,7 @@ export const reqToken = (api_token) =>
 
 // 登出
 export const reqLogout = (api_token) =>
-  ajax(`${apiUrl}/api/auth/logout`, { api_token }, "POST");
+  ajax(`${apipathUrl}/api/auth/logout`, { api_token }, "POST");
 
 // 添加用戶
 // export const reqAddUser = (user) => ajax("/manage/user/add", user, "POST");
