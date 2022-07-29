@@ -14,7 +14,6 @@ import {
   BarChartOutlined,
 } from "@ant-design/icons";
 
-
 const LetNav = (props) => {
   const path = props.location.pathname;
   return (
@@ -27,20 +26,15 @@ const LetNav = (props) => {
         </LeftNavStyle>
       </Link>
       {/* TODO (35)selectedKeys要改*/}
-	  {/* defaultOpenKeys={["/charts"]} */}
+      {/* defaultOpenKeys={["/charts"]} */}
       <Menu
         defaultSelectedKeys={[path]}
         selectedKeys={[path]}
         mode="inline"
-        theme="dark">
+        theme="dark"
+      >
         <Menu.Item key="/home" icon={<HomeOutlined />}>
           <Link to="/home">首頁</Link>
-        </Menu.Item>
-        <Menu.Item key="/role" icon={<DesktopOutlined />}>
-          <Link to="/role">用戶管理</Link>
-        </Menu.Item>
-        <Menu.Item key="/user" icon={<UserOutlined />}>
-          <Link to="/user">角色管理</Link>
         </Menu.Item>
         <Menu.SubMenu
           key="/productsManage"
@@ -54,6 +48,12 @@ const LetNav = (props) => {
             <Link to="/products">商品管理</Link>
           </Menu.Item>
         </Menu.SubMenu>
+        <Menu.Item key="/user" icon={<DesktopOutlined />}>
+          <Link to="/user">用戶管理</Link>
+        </Menu.Item>
+        <Menu.Item key="/role" icon={<UserOutlined />}>
+          <Link to="/role">角色管理</Link>
+        </Menu.Item>
         <Menu.SubMenu key="/charts" title="圖形圖表" icon={<FundOutlined />}>
           <Menu.Item key="/charts/barchart" icon={<BarChartOutlined />}>
             <Link to="/charts/barchart">柱形圖</Link>

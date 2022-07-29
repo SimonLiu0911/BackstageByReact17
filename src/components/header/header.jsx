@@ -15,29 +15,29 @@ const Header = (props) => {
   const timer = useRef(null);
   const path = props.location.pathname;
 
-  const handleCheckToken = async () => {
-    const { token } = storageUtils.getUser("user_key");
-    try {
-      const response = await reqToken(token);
-    } catch {
-      props.history.replace("/login");
-    }
-  };
+  //   const handleCheckToken = async () => {
+  //     const { token } = storageUtils.getUser("user_key");
+  //     try {
+  //       const response = await reqToken(token);
+  //     } catch {
+  //       props.history.replace("/login");
+  //     }
+  //   };
 
-  const getTitle = () => {
-    menuList.forEach((item) => {
-      if (item.key === path) {
-        setTitle(item.title);
-      } else if (item.children) {
-        const cItem = item.children.find((cItem) => {
-          return cItem.key === path;
-        });
-        if (cItem) {
-          setTitle(cItem.title);
-        }
-      }
-    });
-  };
+  //   const getTitle = () => {
+  //     menuList.forEach((item) => {
+  //       if (item.key === path) {
+  //         setTitle(item.title);
+  //       } else if (item.children) {
+  //         const cItem = item.children.find((cItem) => {
+  //           return cItem.key === path;
+  //         });
+  //         if (cItem) {
+  //           setTitle(cItem.title);
+  //         }
+  //       }
+  //     });
+  //   };
 
   const handleLogout = () => {
     // 跳出 Modal
@@ -58,12 +58,32 @@ const Header = (props) => {
   };
 
   useEffect(() => {
+    async function handleCheckToken() {
+      const { token } = storageUtils.getUser("user_key");
+      try {
+        const response = await reqToken(token);
+      } catch {
+        props.history.replace("/login");
+      }
+    }
     handleCheckToken();
   }, [props.history]);
 
   useEffect(() => {
+    function getTitle() {
+      menuList.forEach((item) => {
+        if (item.key === path) {
+          setTitle(item.title);
+        } else if (item.children) {
+          const cItem = item.children.find((cItem) => path.indexOf(cItem.key) === 0);
+          if (cItem) {
+            setTitle(cItem.title);
+          }
+        }
+      });
+    }
     getTitle();
-  }, [path]);
+  }, [props.history, path]);
 
   useEffect(() => {
     timer.current = setInterval(() => {

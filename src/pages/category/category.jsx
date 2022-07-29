@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Table, Modal, Input, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { reqCategories, reqUpdateCategories, reqAddCategories } from "../../assets/api";
-import { nanoid } from 'nanoid'
+import {
+  reqCategories,
+  reqUpdateCategories,
+  reqAddCategories,
+} from "../../assets/api";
+import { nanoid } from "nanoid";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -14,16 +18,16 @@ const Category = () => {
   const [categoryName, setCategoryName] = useState("");
   const [optionedCategory, setOptionedCategory] = useState({});
   const [modalState, setModalState] = useState(null);
-  const getCategories = async () => {
-    setIsLoading(true);
-    const response = await reqCategories(parentId);
-    if (parentId === "0") {
-      setCategories(response.data);
-    } else {
-      setSubCategories(response.data);
-    }
-    setIsLoading(false);
-  };
+  //   const getCategories = async () => {
+  //     setIsLoading(true);
+  //     const response = await reqCategories(parentId);
+  //     if (parentId === "0") {
+  //       setCategories(response.data);
+  //     } else {
+  //       setSubCategories(response.data);
+  //     }
+  //     setIsLoading(false);
+  //   };
   const columns = [
     {
       title: "分類名稱",
@@ -45,17 +49,20 @@ const Category = () => {
     },
   ];
   const updateCategory = (category) => {
-    setModalState(0)
+    setModalState(0);
     setCategoryName(category.name);
-    setOptionedCategory(category)
+    setOptionedCategory(category);
     setIsModalVisible(true);
   };
   const handleConfirm = async () => {
     setIsModalVisible(false);
     if (modalState === 0) {
-        const result = await reqUpdateCategories(optionedCategory.id, categoryName)
+      const result = await reqUpdateCategories(
+        optionedCategory.id,
+        categoryName
+      );
     } else {
-        reqAddCategories(nanoid(), categoryName)
+      reqAddCategories(nanoid(), categoryName);
     }
     // setCategoryName("")
   };
@@ -74,9 +81,9 @@ const Category = () => {
   };
   // 新增類別
   const addCategory = () => {
-    setModalState(1)
+    setModalState(1);
     setIsModalVisible(true);
-  }
+  };
 
   const title =
     parentId === "0" ? (
@@ -95,8 +102,18 @@ const Category = () => {
   );
 
   useEffect(() => {
+    async function getCategories() {
+      setIsLoading(true);
+      const response = await reqCategories(parentId);
+      if (parentId === "0") {
+        setCategories(response.data);
+      } else {
+        setSubCategories(response.data);
+      }
+      setIsLoading(false);
+    }
     getCategories();
-  }, []);
+  }, [parentId]);
 
   return (
     <div>
@@ -115,9 +132,9 @@ const Category = () => {
           onOk={() => {
             if (categoryName) {
               handleConfirm();
-              setCategoryName("")
+              setCategoryName("");
             } else {
-                message.error('請輸入分類');
+              message.error("請輸入分類");
             }
           }}
           onCancel={handleCancel}
